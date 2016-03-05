@@ -2,15 +2,16 @@
 
 namespace graphicEditor
 {
-    internal class Triangle:Line
+    class Triangle:Line
     {
         protected uint FigureEnd { get; set; }
-        internal Triangle(uint start, uint end, uint figureEnd) : base(start, end)
+        public Triangle(uint start, uint end, uint figureEnd) : base(start, end)
         {
             FigureEnd = figureEnd;
         }
 
-        internal string DrawTriangle()
+
+        public override string Draw()
         {
             return "Triangle (" + StartPoint + " ," + EndPoint + " ," + FigureEnd + ");" + Environment.NewLine;
         }

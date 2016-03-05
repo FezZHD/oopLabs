@@ -32,8 +32,6 @@
             this.lineButton = new System.Windows.Forms.Button();
             this.firstCoordinate = new System.Windows.Forms.TextBox();
             this.First = new System.Windows.Forms.GroupBox();
-            this.Sixth = new System.Windows.Forms.GroupBox();
-            this.sixthCoordinate = new System.Windows.Forms.TextBox();
             this.Second = new System.Windows.Forms.GroupBox();
             this.secondCoordinate = new System.Windows.Forms.TextBox();
             this.Third = new System.Windows.Forms.GroupBox();
@@ -43,8 +41,12 @@
             this.Fifth = new System.Windows.Forms.GroupBox();
             this.fifthCoordinate = new System.Windows.Forms.TextBox();
             this.Triangle = new System.Windows.Forms.Button();
+            this.Rectangle = new System.Windows.Forms.Button();
+            this.Circle = new System.Windows.Forms.Button();
+            this.Ellipse = new System.Windows.Forms.Button();
+            this.Pentagon = new System.Windows.Forms.Button();
+            this.DrawAll = new System.Windows.Forms.Button();
             this.First.SuspendLayout();
-            this.Sixth.SuspendLayout();
             this.Second.SuspendLayout();
             this.Third.SuspendLayout();
             this.Fouth.SuspendLayout();
@@ -56,6 +58,7 @@
             this.textList.Location = new System.Drawing.Point(0, 12);
             this.textList.Multiline = true;
             this.textList.Name = "textList";
+            this.textList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textList.Size = new System.Drawing.Size(216, 586);
             this.textList.TabIndex = 0;
             // 
@@ -85,23 +88,6 @@
             this.First.TabIndex = 4;
             this.First.TabStop = false;
             this.First.Text = "The First Cordinate";
-            // 
-            // Sixth
-            // 
-            this.Sixth.Controls.Add(this.sixthCoordinate);
-            this.Sixth.Location = new System.Drawing.Point(389, 410);
-            this.Sixth.Name = "Sixth";
-            this.Sixth.Size = new System.Drawing.Size(131, 56);
-            this.Sixth.TabIndex = 5;
-            this.Sixth.TabStop = false;
-            this.Sixth.Text = "The Sixth Cordinate";
-            // 
-            // sixthCoordinate
-            // 
-            this.sixthCoordinate.Location = new System.Drawing.Point(6, 19);
-            this.sixthCoordinate.Name = "sixthCoordinate";
-            this.sixthCoordinate.Size = new System.Drawing.Size(100, 20);
-            this.sixthCoordinate.TabIndex = 2;
             // 
             // Second
             // 
@@ -181,12 +167,66 @@
             this.Triangle.UseVisualStyleBackColor = true;
             this.Triangle.Click += new System.EventHandler(this.Triangle_Click);
             // 
+            // Rectangle
+            // 
+            this.Rectangle.Location = new System.Drawing.Point(251, 93);
+            this.Rectangle.Name = "Rectangle";
+            this.Rectangle.Size = new System.Drawing.Size(89, 27);
+            this.Rectangle.TabIndex = 7;
+            this.Rectangle.Text = "Rectangle";
+            this.Rectangle.UseVisualStyleBackColor = true;
+            this.Rectangle.Click += new System.EventHandler(this.Rectangle_Click);
+            // 
+            // Circle
+            // 
+            this.Circle.Location = new System.Drawing.Point(251, 126);
+            this.Circle.Name = "Circle";
+            this.Circle.Size = new System.Drawing.Size(89, 30);
+            this.Circle.TabIndex = 8;
+            this.Circle.Text = "Circle";
+            this.Circle.UseVisualStyleBackColor = true;
+            this.Circle.Click += new System.EventHandler(this.CircleClick);
+            // 
+            // Ellipse
+            // 
+            this.Ellipse.Location = new System.Drawing.Point(251, 162);
+            this.Ellipse.Name = "Ellipse";
+            this.Ellipse.Size = new System.Drawing.Size(89, 30);
+            this.Ellipse.TabIndex = 9;
+            this.Ellipse.Text = "Ellipse";
+            this.Ellipse.UseVisualStyleBackColor = true;
+            this.Ellipse.Click += new System.EventHandler(this.Ellipse_Click);
+            // 
+            // Pentagon
+            // 
+            this.Pentagon.Location = new System.Drawing.Point(251, 198);
+            this.Pentagon.Name = "Pentagon";
+            this.Pentagon.Size = new System.Drawing.Size(89, 29);
+            this.Pentagon.TabIndex = 10;
+            this.Pentagon.Text = "Pentagon";
+            this.Pentagon.UseVisualStyleBackColor = true;
+            this.Pentagon.Click += new System.EventHandler(this.Pentagon_Click);
+            // 
+            // DrawAll
+            // 
+            this.DrawAll.Location = new System.Drawing.Point(251, 243);
+            this.DrawAll.Name = "DrawAll";
+            this.DrawAll.Size = new System.Drawing.Size(89, 29);
+            this.DrawAll.TabIndex = 11;
+            this.DrawAll.Text = "Draw All";
+            this.DrawAll.UseVisualStyleBackColor = true;
+            this.DrawAll.Click += new System.EventHandler(this.DrawAll_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(553, 610);
+            this.Controls.Add(this.DrawAll);
+            this.Controls.Add(this.Pentagon);
+            this.Controls.Add(this.Ellipse);
+            this.Controls.Add(this.Circle);
+            this.Controls.Add(this.Rectangle);
             this.Controls.Add(this.Triangle);
-            this.Controls.Add(this.Sixth);
             this.Controls.Add(this.Second);
             this.Controls.Add(this.Third);
             this.Controls.Add(this.Fouth);
@@ -200,8 +240,6 @@
             this.Text = "Graphic Editror";
             this.First.ResumeLayout(false);
             this.First.PerformLayout();
-            this.Sixth.ResumeLayout(false);
-            this.Sixth.PerformLayout();
             this.Second.ResumeLayout(false);
             this.Second.PerformLayout();
             this.Third.ResumeLayout(false);
@@ -221,8 +259,6 @@
         private System.Windows.Forms.Button lineButton;
         private System.Windows.Forms.TextBox firstCoordinate;
         private System.Windows.Forms.GroupBox First;
-        private System.Windows.Forms.GroupBox Sixth;
-        private System.Windows.Forms.TextBox sixthCoordinate;
         private System.Windows.Forms.GroupBox Second;
         private System.Windows.Forms.TextBox secondCoordinate;
         private System.Windows.Forms.GroupBox Third;
@@ -232,7 +268,11 @@
         private System.Windows.Forms.GroupBox Fifth;
         private System.Windows.Forms.TextBox fifthCoordinate;
         private System.Windows.Forms.Button Triangle;
-
+        private System.Windows.Forms.Button Rectangle;
+        private System.Windows.Forms.Button Circle;
+        private System.Windows.Forms.Button Ellipse;
+        private System.Windows.Forms.Button Pentagon;
+        private System.Windows.Forms.Button DrawAll;
     }
 }
 
