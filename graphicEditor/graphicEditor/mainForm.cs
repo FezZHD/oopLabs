@@ -13,7 +13,7 @@ namespace graphicEditor
             InitText();
         }
 
-        private List<TextBox> listTextBoxs= new List<TextBox>();
+        private List<TextBox> listTextBoxs = new List<TextBox>();
         private List<uint> currentCoor;
 
         private void InitText()

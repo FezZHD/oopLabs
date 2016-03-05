@@ -7,18 +7,18 @@ namespace graphicEditor
 {
     class FigureList
     {
-        private List<Figure> listFigure = new List<Figure>();
+        private List<Shape> listFigure = new List<Shape>();
 
-        public void AddFigure(Figure figure)
+        public void AddFigure(Shape Shape)
         {
-            listFigure.Add(figure);
+            listFigure.Add(Shape);
         }
 
         public void DrawList(TextBox box)
         {
-            foreach (var figure in listFigure)
+            foreach (var Shape in listFigure)
             {
-                box.Text += figure.Draw() + Environment.NewLine;
+                box.Text += Shape.Draw() + Environment.NewLine;
             }
         }
     }

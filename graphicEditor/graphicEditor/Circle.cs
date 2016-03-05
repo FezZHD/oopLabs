@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace graphicEditor
 {
-    class MyCircle:Figure
+    class MyCircle:Shape
     {
-        protected uint StartPoint;
-        protected uint HorizontalRadius;
 
-       public MyCircle(uint startPoint , uint horizontalRadius)
+       protected readonly uint HorizontalRadius;
+
+       public MyCircle(uint startPoint , uint horizontalRadius): base (startPoint)
         {
-            StartPoint = startPoint;
             HorizontalRadius = horizontalRadius;
         }
 
         public override string Draw()
         {
-            return "Circle ( Start point:" + StartPoint + "; Radius :" + HorizontalRadius + ")" + Environment.NewLine;
+            return "Circle ( Start point:" + _startPoint + "; Radius :" + HorizontalRadius + ")" + Environment.NewLine;
         }
     }
 }

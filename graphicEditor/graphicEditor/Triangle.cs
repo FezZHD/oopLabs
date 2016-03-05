@@ -2,18 +2,20 @@
 
 namespace graphicEditor
 {
-    class Triangle:Line
+    class Triangle:Shape
     {
         protected uint FigureEnd { get; set; }
-        public Triangle(uint start, uint end, uint figureEnd) : base(start, end)
+        private uint _secondPoint;
+        public Triangle(uint start, uint secondPoint, uint figureEnd) : base(start)
         {
+            _secondPoint = secondPoint;
             FigureEnd = figureEnd;
         }
 
 
         public override string Draw()
         {
-            return "Triangle (" + StartPoint + " ," + EndPoint + " ," + FigureEnd + ");" + Environment.NewLine;
+            return "Triangle (" + _startPoint + " ," + _secondPoint + " ," + FigureEnd + ");" + Environment.NewLine;
         }
     }
 }

@@ -4,16 +4,16 @@ namespace graphicEditor
 {
     class MyEllipse:MyCircle
     {
-        protected uint VerticalRadius;
+        private readonly uint verticalRadius;
 
         public MyEllipse(uint startPoint, uint horizontalRadius, uint verticalRadius) : base(startPoint,horizontalRadius)
         {
-            VerticalRadius = verticalRadius;
+            this.verticalRadius = verticalRadius;
         }
 
         public override string Draw()
         {
-           return "Ellipse ( Start point:" + StartPoint + "; Horizontal Radius :" + HorizontalRadius + "; Vertical Radius :" + VerticalRadius + ");" + Environment.NewLine;
+           return "Ellipse ( Start point:" + _startPoint + "; Horizontal Radius :" + HorizontalRadius + "; Vertical Radius :" + verticalRadius + ");" + Environment.NewLine;
         }
     }
 }

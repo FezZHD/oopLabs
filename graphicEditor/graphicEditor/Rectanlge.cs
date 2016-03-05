@@ -2,17 +2,21 @@
 
 namespace graphicEditor
 {
-    class MyRectanlge:Triangle
+    class MyRectanlge:Shape
     {
         protected uint RectangleEnd { get; set; }
-        public MyRectanlge (uint start , uint end, uint figureEnd ,uint rectangleEnd ) : base (start , end ,figureEnd)
+        private uint SecondPoint;
+        private uint ThirdPoint;
+        public MyRectanlge (uint startPoint , uint secondPoint, uint thirdPoint ,uint rectangleEnd ) : base (startPoint)
         {
+            SecondPoint = secondPoint;
+            ThirdPoint = thirdPoint;
             RectangleEnd = rectangleEnd;
         }
 
         public override string Draw()
         {
-            return "Rectangle (" + StartPoint + " ," + EndPoint + " ," + FigureEnd + " ," + RectangleEnd + ");" + Environment.NewLine;
+            return "Rectangle (" + _startPoint + " ," + SecondPoint + " ," + ThirdPoint + " ," + RectangleEnd + ");" + Environment.NewLine;
         }
     }
 }

@@ -2,18 +2,24 @@
 
 namespace graphicEditor
 {
-    class Pentagon:MyRectanlge
+    class Pentagon:Shape   
     {
         private uint EndPentagon;
+        private uint SecondPoint;
+        private uint ThirdPoint;
+        private uint FouthPoint;
 
-        public Pentagon(uint start, uint end, uint figureEnd, uint rectangleEnd, uint pentagonEnd): base(start, end, figureEnd, rectangleEnd)
+        public Pentagon(uint startPoint, uint secondPoint, uint thirdPoint, uint fouthPoint, uint pentagonEnd): base (startPoint)
         {
+            SecondPoint = secondPoint;
+            ThirdPoint = thirdPoint;
+            FouthPoint = fouthPoint;
             EndPentagon = pentagonEnd;
         }
 
         public override string Draw()
         {
-            return "Pentagon (" + StartPoint + " ," + EndPoint + " ," + FigureEnd + " ," + RectangleEnd +  "," + EndPentagon + ");" + Environment.NewLine;
+            return "Pentagon (" + _startPoint + " ," + SecondPoint + " ," + ThirdPoint + " ," + FouthPoint +  "," + EndPentagon + ");" + Environment.NewLine;
         }
     }
 }

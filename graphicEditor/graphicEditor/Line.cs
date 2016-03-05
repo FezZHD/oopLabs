@@ -2,20 +2,19 @@
 
 namespace graphicEditor
 {
-     class Line:Figure
+     class Line:Shape
     {
-        protected uint StartPoint { get; private set; }
+
         protected uint EndPoint { get; private set; }
         
-        internal Line(uint start, uint end)
+        public Line(uint start, uint end):base (start)
         {
-            StartPoint = start;
             EndPoint = end;
         }
 
          public override string Draw()
          {
-            return "Line (" + StartPoint + " ," + EndPoint + ");" + Environment.NewLine;
+            return "Line (" + _startPoint + " ," + EndPoint + ");" + Environment.NewLine;
          }
     }
 }

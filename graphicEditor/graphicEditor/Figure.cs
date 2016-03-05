@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace graphicEditor
 {
-    abstract class Figure
+    abstract class Shape
     {
+       protected uint _startPoint;
        public abstract string Draw();
+
+        void dd() { }
+
+        protected Shape(uint startPoint)
+        {
+            _startPoint = startPoint;
+        }  
     }
 }
