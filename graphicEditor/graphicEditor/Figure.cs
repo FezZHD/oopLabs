@@ -11,11 +11,9 @@ namespace graphicEditor
        protected uint _startPoint;
        public abstract string Draw();
 
-        void dd() { }
-
         protected Shape(uint startPoint)
         {
             _startPoint = startPoint;
-        }  
+        }
     }
 }
