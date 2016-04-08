@@ -27,7 +27,7 @@
     {
         public Shape GetShape()
         {
-            return new MyRectanlge(4);
+            return new MyRectanlge(2);
         }
     }
 

@@ -7,14 +7,15 @@ namespace graphicEditor
 {
     public partial class MainForm : Form
     {
-        private Shape NewShape;
-        private List<IFigureCreator> figureCreators;
+        private Shape _newShape;
+        private List<IFigureCreator> _figureCreators;
         private IFigureCreator Creator { get; set; }
         private bool IsDrawing { get; set; }
-        private uint[] CurrentPoints = new uint[2];
+        private uint[] _currentPoints = new uint[2];
         private int _currentPointsCount;
-        Graphics graphicCanvas;
-        private Bitmap imageBitmap;
+        Graphics _graphicCanvas;
+        private Bitmap _imageBitmap;
+        public Color SelectedColor = Color.Black;
 
 
 
@@ -23,9 +24,9 @@ namespace graphicEditor
 
             InitializeComponent();
           
-            imageBitmap = new Bitmap(canvas.Width, canvas.Height);
-            graphicCanvas = Graphics.FromImage(imageBitmap);
-            figureCreators = new List<IFigureCreator>
+            _imageBitmap = new Bitmap(canvas.Width, canvas.Height);
+            _graphicCanvas = Graphics.FromImage(_imageBitmap);
+            _figureCreators = new List<IFigureCreator>
             {
                 new CreateLine(),
                 new CreateTriangle(),
@@ -41,9 +42,9 @@ namespace graphicEditor
         {
             _currentPointsCount = 0;
             Control send = (Control) sender;
-            Creator = figureCreators[int.Parse(send.Tag.ToString())];
+            Creator = _figureCreators[int.Parse(send.Tag.ToString())];
             IsDrawing = true;
-            NewShape = Creator.GetShape();
+            _newShape = Creator.GetShape();
         }
 
 
@@ -55,26 +56,38 @@ namespace graphicEditor
                 return;
             }
 
-            CurrentPoints[0] = (ushort)Convert.ToInt32(e.X);
-            CurrentPoints[1] = (ushort)Convert.ToInt32(e.Y) ;
+            _currentPoints[0] = (ushort)Convert.ToInt32(e.X);
+            _currentPoints[1] = (ushort)Convert.ToInt32(e.Y) ;
 
             
-            NewShape.AddToList(CurrentPoints);
+            _newShape.AddToList(_currentPoints);
 
             _currentPointsCount++;
-            if (_currentPointsCount == NewShape.PointCounter)
+            if (_currentPointsCount == _newShape.PointCounter)
             {
-                NewShape.Draw(graphicCanvas,NewShape._pointsList);
-                canvas.Image = imageBitmap;
-                NewShape._pointsList.Clear();
+                _newShape._brushColor = SelectedColor;
+                _newShape.Thinkness = (int) ThiknessValue.Value;
+                _newShape.Draw(_graphicCanvas,_newShape._pointsList);
+                canvas.Image = _imageBitmap;
+                _newShape._pointsList.Clear();
                 _currentPointsCount = 0;
             }
         }
 
         private void ClearClick(object sender, EventArgs e)
         {
-            graphicCanvas.Clear(Color.White);
-            canvas.Image = imageBitmap;
+            _graphicCanvas.Clear(Color.White);
+            canvas.Image = _imageBitmap;
+        }
+
+        private void SelectColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog selectColor = new ColorDialog();
+            if (selectColor.ShowDialog() == DialogResult.OK)
+            {
+                SelectedColor = selectColor.Color;
+            }
+
         }
     }
 }

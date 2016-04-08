@@ -14,7 +14,9 @@ namespace graphicEditor
 
         public override void Draw(Graphics graphics, List<uint[]> pointsList)
         {
-            
+            int diametr = (int)Math.Abs(pointsList[0][1] - pointsList[1][1]);
+            diametr *= -1;
+            graphics.DrawEllipse(new Pen(_brushColor, Thinkness), pointsList[0][0], pointsList[0][1], diametr, diametr);
         }
 
 

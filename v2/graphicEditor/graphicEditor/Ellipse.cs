@@ -15,7 +15,7 @@ namespace graphicEditor
             int realWidth =  (int) Math.Abs(pointsList[0][0] - pointsList[1][0]);
             realHeight *= -1;
             realWidth *= -1;
-            graphics.DrawEllipse(new Pen(_brushColor,3),pointsList[0][0], pointsList[0][1],realWidth,realHeight);
+            graphics.DrawEllipse(new Pen(_brushColor, Thinkness), pointsList[0][0], pointsList[0][1], realWidth, realHeight);
         }
 
         public MyEllipse(ushort pointsCount) : base(pointsCount)

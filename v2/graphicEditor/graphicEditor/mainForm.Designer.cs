@@ -36,7 +36,12 @@
             this.Pentagon = new System.Windows.Forms.Button();
             this.canvas = new System.Windows.Forms.PictureBox();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.SelectColor = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ThiknessValue = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ThiknessValue)).BeginInit();
             this.SuspendLayout();
             // 
             // lineButton
@@ -125,10 +130,44 @@
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearClick);
             // 
+            // SelectColor
+            // 
+            this.SelectColor.Location = new System.Drawing.Point(771, 500);
+            this.SelectColor.Name = "SelectColor";
+            this.SelectColor.Size = new System.Drawing.Size(75, 23);
+            this.SelectColor.TabIndex = 14;
+            this.SelectColor.Text = "Color";
+            this.SelectColor.UseVisualStyleBackColor = true;
+            this.SelectColor.Click += new System.EventHandler(this.SelectColor_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ThiknessValue);
+            this.groupBox1.Location = new System.Drawing.Point(771, 301);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(89, 53);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Thikness";
+            // 
+            // ThiknessValue
+            // 
+            this.ThiknessValue.Location = new System.Drawing.Point(6, 19);
+            this.ThiknessValue.Name = "ThiknessValue";
+            this.ThiknessValue.Size = new System.Drawing.Size(77, 20);
+            this.ThiknessValue.TabIndex = 0;
+            this.ThiknessValue.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(872, 610);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.SelectColor);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.Pentagon);
@@ -142,6 +181,8 @@
             this.Name = "MainForm";
             this.Text = "Graphic Editror";
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ThiknessValue)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -157,6 +198,9 @@
         private System.Windows.Forms.Button Pentagon;
         private System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Button SelectColor;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown ThiknessValue;
     }
 }
 

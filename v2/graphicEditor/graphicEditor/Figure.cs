@@ -11,7 +11,8 @@ namespace graphicEditor
         public ushort PointCounter { get; set; }
 
         public List<uint[]> _pointsList;
-        public Color _brushColor = Color.Black;
+        public Color _brushColor { get; set; }
+        public int Thinkness { get; set; }
         public abstract void Draw(Graphics canvas, List<uint[]> _pointsList);
 
         public virtual void AddToList(uint[] PointsArray)
