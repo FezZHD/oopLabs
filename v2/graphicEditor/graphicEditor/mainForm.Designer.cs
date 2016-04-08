@@ -35,6 +35,7 @@
             this.Ellipse = new System.Windows.Forms.Button();
             this.Pentagon = new System.Windows.Forms.Button();
             this.canvas = new System.Windows.Forms.PictureBox();
+            this.ClearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,10 +115,21 @@
             this.canvas.TabStop = false;
             this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
             // 
+            // ClearButton
+            // 
+            this.ClearButton.Location = new System.Drawing.Point(771, 575);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearButton.TabIndex = 13;
+            this.ClearButton.Text = "Clear";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearClick);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(872, 610);
+            this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.canvas);
             this.Controls.Add(this.Pentagon);
             this.Controls.Add(this.Ellipse);
@@ -144,6 +156,7 @@
         private System.Windows.Forms.Button Ellipse;
         private System.Windows.Forms.Button Pentagon;
         private System.Windows.Forms.PictureBox canvas;
+        private System.Windows.Forms.Button ClearButton;
     }
 }
 

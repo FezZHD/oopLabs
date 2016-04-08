@@ -11,19 +11,16 @@ namespace graphicEditor
     class MyCircle:Shape
     {
 
-  
+
         public override void Draw(Graphics graphics, List<uint[]> pointsList)
         {
             
         }
 
-        public  void AddToList(ushort[] pointsArray)
-        {
-          
-        }
 
         public MyCircle(ushort pointsCount) : base(pointsCount)
         {
+
         }
     }
 }

@@ -15,8 +15,8 @@ namespace graphicEditor
         private int _currentPointsCount;
         Graphics graphicCanvas;
         private Bitmap imageBitmap;
- 
-       
+
+
 
         public MainForm()
         {
@@ -71,7 +71,11 @@ namespace graphicEditor
             }
         }
 
-    
+        private void ClearClick(object sender, EventArgs e)
+        {
+            graphicCanvas.Clear(Color.White);
+            canvas.Image = imageBitmap;
+        }
     }
 }
 
