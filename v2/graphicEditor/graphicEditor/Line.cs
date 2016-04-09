@@ -7,9 +7,9 @@ namespace graphicEditor
 {
      class Line:Shape
     {     
-         public override void Draw(Graphics graphics, List<uint[]> pointsList)
+         public override void Draw(Graphics graphics)
          {
-            graphics.DrawLine(new Pen(_brushColor, Thinkness),pointsList[0][0] , pointsList[0][1], pointsList[1][0], pointsList[1][1]);
+            graphics.DrawLine(new Pen(_brushColor, Thinkness),_pointsList[0][0] , _pointsList[0][1], _pointsList[1][0], _pointsList[1][1]);
          }
 
 

@@ -12,11 +12,11 @@ namespace graphicEditor
     {
 
 
-        public override void Draw(Graphics graphics, List<uint[]> pointsList)
+        public override void Draw(Graphics graphics)
         {
-            int diametr = (int)Math.Abs(pointsList[0][1] - pointsList[1][1]);
+            int diametr = (int)Math.Abs(_pointsList[0][1] - _pointsList[1][1]);
             diametr *= -1;
-            graphics.DrawEllipse(new Pen(_brushColor, Thinkness), pointsList[0][0], pointsList[0][1], diametr, diametr);
+            graphics.DrawEllipse(new Pen(_brushColor, Thinkness), _pointsList[0][0], _pointsList[0][1], diametr, diametr);
         }
 
 

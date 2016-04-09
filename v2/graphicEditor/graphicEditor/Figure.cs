@@ -13,7 +13,7 @@ namespace graphicEditor
         public List<uint[]> _pointsList;
         public Color _brushColor { get; set; }
         public int Thinkness { get; set; }
-        public abstract void Draw(Graphics canvas, List<uint[]> _pointsList);
+        public abstract void Draw(Graphics canvas);
 
         public virtual void AddToList(uint[] PointsArray)
         {

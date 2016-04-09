@@ -8,6 +8,7 @@ namespace graphicEditor
     public partial class MainForm : Form
     {
         private Shape _newShape;
+        private List<Shape> Shapes = new List<Shape>(); 
         private List<IFigureCreator> _figureCreators;
         private IFigureCreator Creator { get; set; }
         private bool IsDrawing { get; set; }
@@ -67,9 +68,13 @@ namespace graphicEditor
             {
                 _newShape._brushColor = SelectedColor;
                 _newShape.Thinkness = (int) ThiknessValue.Value;
-                _newShape.Draw(_graphicCanvas,_newShape._pointsList);
+                _newShape.Draw(_graphicCanvas);
                 canvas.Image = _imageBitmap;
-                _newShape._pointsList.Clear();
+                Shapes.Add(_newShape);
+                //list.add()
+                _newShape = Creator.GetShape();
+
+               //_newShape._pointsList.Clear();
                 _currentPointsCount = 0;
             }
         }
