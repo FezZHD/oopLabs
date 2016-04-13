@@ -71,10 +71,7 @@ namespace graphicEditor
                 _newShape.Draw(_graphicCanvas);
                 canvas.Image = _imageBitmap;
                 Shapes.Add(_newShape);
-                //list.add()
                 _newShape = Creator.GetShape();
-
-               //_newShape._pointsList.Clear();
                 _currentPointsCount = 0;
             }
         }
