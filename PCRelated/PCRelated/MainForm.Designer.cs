@@ -39,17 +39,17 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.ItemsView = new System.Windows.Forms.ListView();
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RelatedName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Manufacture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RelatedName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // PropertyDataGrid
             // 
             this.PropertyDataGrid.HelpVisible = false;
-            this.PropertyDataGrid.Location = new System.Drawing.Point(967, 12);
+            this.PropertyDataGrid.Location = new System.Drawing.Point(931, 12);
             this.PropertyDataGrid.Name = "PropertyDataGrid";
-            this.PropertyDataGrid.Size = new System.Drawing.Size(205, 607);
+            this.PropertyDataGrid.Size = new System.Drawing.Size(241, 607);
             this.PropertyDataGrid.TabIndex = 0;
             // 
             // RelatedBox
@@ -72,7 +72,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 36);
-            this.label1.Name = "label1";
+            this.label1.Name = "RelatedLabel";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Тип переферии";
@@ -94,7 +94,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 83);
-            this.label2.Name = "label2";
+            this.label2.Name = "SerialazableLabel";
             this.label2.Size = new System.Drawing.Size(80, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Сериализация";
@@ -125,7 +125,6 @@
             this.DeleteButton.TabIndex = 7;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.button2_Click);
             // 
             // AddButton
             // 
@@ -143,34 +142,33 @@
             this.Manufacture,
             this.RelatedName,
             this.Type});
-            this.ItemsView.Location = new System.Drawing.Point(582, 12);
+            this.ItemsView.Location = new System.Drawing.Point(529, 12);
             this.ItemsView.MultiSelect = false;
             this.ItemsView.Name = "ItemsView";
-            this.ItemsView.Size = new System.Drawing.Size(346, 607);
+            this.ItemsView.Size = new System.Drawing.Size(360, 607);
             this.ItemsView.TabIndex = 9;
             this.ItemsView.UseCompatibleStateImageBehavior = false;
             this.ItemsView.View = System.Windows.Forms.View.Details;
             // 
             // ID
             // 
-            this.ID.DisplayIndex = 0;
             this.ID.Text = "ID";
             this.ID.Width = 30;
             // 
-            // Type
+            // Manufacture
             // 
-            this.Type.DisplayIndex = 0;
-            this.Type.Text = "Тип переферии";
+            this.Manufacture.Text = "Производитель";
+            this.Manufacture.Width = 131;
             // 
             // RelatedName
             // 
             this.RelatedName.Text = "Имя";
             this.RelatedName.Width = 90;
             // 
-            // Manufacture
+            // Type
             // 
-            this.Manufacture.Text = "Производитель";
-            this.Manufacture.Width = 131;
+            this.Type.Text = "Тип переферии";
+            this.Type.Width = 96;
             // 
             // MainForm
             // 
