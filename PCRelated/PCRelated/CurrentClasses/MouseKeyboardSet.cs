@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace PCRelated
+namespace PCRelated.CurrentClasses
 {
+    [Serializable]
     class MouseKeyboardSet:Keyboard
     {
-        private Mouse MouseKit { get; set; }
+        [TypeConverter(typeof(ExpandableObjectConverter))]
+        public Mouse MouseKit { get; set; }
 
         public MouseKeyboardSet(string type) : base(type)
         {

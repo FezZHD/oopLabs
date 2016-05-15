@@ -30,18 +30,15 @@
         {
             this.PropertyDataGrid = new System.Windows.Forms.PropertyGrid();
             this.RelatedBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.RelatedLabel = new System.Windows.Forms.Label();
             this.SerialazableBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.SerialazableLabel = new System.Windows.Forms.Label();
             this.SerialazebleButton = new System.Windows.Forms.Button();
             this.DeserialazebleButton = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
-            this.ItemsView = new System.Windows.Forms.ListView();
-            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Manufacture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RelatedName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ListSwitcher = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.ListSwitcher)).BeginInit();
             this.SuspendLayout();
             // 
             // PropertyDataGrid
@@ -67,15 +64,16 @@
             this.RelatedBox.Name = "RelatedBox";
             this.RelatedBox.Size = new System.Drawing.Size(121, 21);
             this.RelatedBox.TabIndex = 1;
+            this.RelatedBox.SelectedIndexChanged += new System.EventHandler(this.RelatedBox_SelectedIndexChanged);
             // 
-            // label1
+            // RelatedLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 36);
-            this.label1.Name = "RelatedLabel";
-            this.label1.Size = new System.Drawing.Size(85, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Тип переферии";
+            this.RelatedLabel.AutoSize = true;
+            this.RelatedLabel.Location = new System.Drawing.Point(11, 36);
+            this.RelatedLabel.Name = "RelatedLabel";
+            this.RelatedLabel.Size = new System.Drawing.Size(85, 13);
+            this.RelatedLabel.TabIndex = 2;
+            this.RelatedLabel.Text = "Тип переферии";
             // 
             // SerialazableBox
             // 
@@ -90,14 +88,14 @@
             this.SerialazableBox.Size = new System.Drawing.Size(121, 21);
             this.SerialazableBox.TabIndex = 3;
             // 
-            // label2
+            // SerialazableLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 83);
-            this.label2.Name = "SerialazableLabel";
-            this.label2.Size = new System.Drawing.Size(80, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Сериализация";
+            this.SerialazableLabel.AutoSize = true;
+            this.SerialazableLabel.Location = new System.Drawing.Point(12, 83);
+            this.SerialazableLabel.Name = "SerialazableLabel";
+            this.SerialazableLabel.Size = new System.Drawing.Size(80, 13);
+            this.SerialazableLabel.TabIndex = 4;
+            this.SerialazableLabel.Text = "Сериализация";
             // 
             // SerialazebleButton
             // 
@@ -119,56 +117,34 @@
             // 
             // DeleteButton
             // 
+            this.DeleteButton.Enabled = false;
             this.DeleteButton.Location = new System.Drawing.Point(164, 586);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(121, 33);
             this.DeleteButton.TabIndex = 7;
             this.DeleteButton.Text = "Удалить";
             this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // AddButton
             // 
+            this.AddButton.Enabled = false;
             this.AddButton.Location = new System.Drawing.Point(164, 522);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(121, 33);
             this.AddButton.TabIndex = 8;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
-            // ItemsView
+            // ListSwitcher
             // 
-            this.ItemsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ID,
-            this.Manufacture,
-            this.RelatedName,
-            this.Type});
-            this.ItemsView.Location = new System.Drawing.Point(529, 12);
-            this.ItemsView.MultiSelect = false;
-            this.ItemsView.Name = "ItemsView";
-            this.ItemsView.Size = new System.Drawing.Size(360, 607);
-            this.ItemsView.TabIndex = 9;
-            this.ItemsView.UseCompatibleStateImageBehavior = false;
-            this.ItemsView.View = System.Windows.Forms.View.Details;
-            // 
-            // ID
-            // 
-            this.ID.Text = "ID";
-            this.ID.Width = 30;
-            // 
-            // Manufacture
-            // 
-            this.Manufacture.Text = "Производитель";
-            this.Manufacture.Width = 131;
-            // 
-            // RelatedName
-            // 
-            this.RelatedName.Text = "Имя";
-            this.RelatedName.Width = 90;
-            // 
-            // Type
-            // 
-            this.Type.Text = "Тип переферии";
-            this.Type.Width = 96;
+            this.ListSwitcher.Enabled = false;
+            this.ListSwitcher.Location = new System.Drawing.Point(805, 599);
+            this.ListSwitcher.Name = "ListSwitcher";
+            this.ListSwitcher.Size = new System.Drawing.Size(120, 20);
+            this.ListSwitcher.TabIndex = 9;
+            this.ListSwitcher.ValueChanged += new System.EventHandler(this.ListSwitcher_ValueChanged);
             // 
             // MainForm
             // 
@@ -176,19 +152,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1184, 631);
-            this.Controls.Add(this.ItemsView);
+            this.Controls.Add(this.ListSwitcher);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.DeserialazebleButton);
             this.Controls.Add(this.SerialazebleButton);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.SerialazableLabel);
             this.Controls.Add(this.SerialazableBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.RelatedLabel);
             this.Controls.Add(this.RelatedBox);
             this.Controls.Add(this.PropertyDataGrid);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "PC Related";
+            ((System.ComponentModel.ISupportInitialize)(this.ListSwitcher)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,18 +175,14 @@
 
         public System.Windows.Forms.PropertyGrid PropertyDataGrid;
         private System.Windows.Forms.ComboBox RelatedBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label RelatedLabel;
         private System.Windows.Forms.ComboBox SerialazableBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label SerialazableLabel;
         private System.Windows.Forms.Button SerialazebleButton;
         private System.Windows.Forms.Button DeserialazebleButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button AddButton;
-        private System.Windows.Forms.ListView ItemsView;
-        private System.Windows.Forms.ColumnHeader ID;
-        private System.Windows.Forms.ColumnHeader Type;
-        private System.Windows.Forms.ColumnHeader RelatedName;
-        private System.Windows.Forms.ColumnHeader Manufacture;
+        private System.Windows.Forms.NumericUpDown ListSwitcher;
     }
 }
 

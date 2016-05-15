@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Serialization;
 
-namespace PCRelated
+namespace PCRelated.CurrentClasses
 {
-    abstract class RelatedCommon
+    [Serializable]
+    [XmlInclude(typeof(Keyboard)),XmlInclude(typeof(Mouse)),
+    XmlInclude(typeof(Monitor)),XmlInclude(typeof(Printers)),
+    XmlInclude(typeof(Mfp)),XmlInclude(typeof(MouseKeyboardSet))]
+    public abstract class RelatedCommon
     {
         public string Type { get; set; }
         public string Name { get; set; }
