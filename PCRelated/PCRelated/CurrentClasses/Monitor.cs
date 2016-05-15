@@ -4,7 +4,7 @@ namespace PCRelated.CurrentClasses
 
 {
     [Serializable]
-    class Monitor:RelatedCommon
+    public class Monitor:RelatedCommon
     {
 
         public string Resolution { get; set; }
@@ -13,6 +13,11 @@ namespace PCRelated.CurrentClasses
 
         public Monitor(string type) : base(type)
         {
+        }
+
+        public Monitor()
+        {
+            
         }
     }
 }

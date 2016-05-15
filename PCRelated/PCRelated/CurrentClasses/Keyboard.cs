@@ -3,7 +3,7 @@
 namespace PCRelated.CurrentClasses
 {
     [Serializable]
-    class Keyboard:RelatedCommon
+    public class Keyboard:RelatedCommon
     {
 
         public uint KeysCount { get; set; }
@@ -12,6 +12,11 @@ namespace PCRelated.CurrentClasses
 
         public Keyboard(string type) : base(type)
         {
+        }
+
+        public Keyboard()
+        {
+            
         }
     }
 }

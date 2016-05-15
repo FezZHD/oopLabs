@@ -3,7 +3,7 @@
 namespace PCRelated.CurrentClasses
 {
     [Serializable]
-    class Mfp:Printers
+    public class Mfp:Printers
     {
         public string CopyResolution { get; set; }
         public uint CopySpeed { get; set; }
@@ -11,6 +11,14 @@ namespace PCRelated.CurrentClasses
 
         public Mfp(string type) : base(type)
         {
+
         }
+
+
+        public Mfp()
+        {
+            
+        }
+       
     }
 }

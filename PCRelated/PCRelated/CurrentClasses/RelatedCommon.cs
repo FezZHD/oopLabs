@@ -17,5 +17,10 @@ namespace PCRelated.CurrentClasses
         {
             Type = type;
         }
+
+        public RelatedCommon()
+        {
+            
+        }
     }
 }

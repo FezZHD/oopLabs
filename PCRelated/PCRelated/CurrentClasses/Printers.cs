@@ -3,7 +3,7 @@
 namespace PCRelated.CurrentClasses
 {
     [Serializable]
-    class Printers:RelatedCommon
+    public class Printers:RelatedCommon
     {
         public string CopyRelosution { get; set; }
         public uint CopySpeen { get; set; }
@@ -11,6 +11,11 @@ namespace PCRelated.CurrentClasses
 
         public Printers(string type) : base(type)
         {
+        }
+
+        public Printers()
+        {
+
         }
     }
 }

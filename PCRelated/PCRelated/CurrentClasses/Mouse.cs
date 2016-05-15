@@ -3,7 +3,7 @@
 namespace PCRelated.CurrentClasses
 {
     [Serializable]
-    class Mouse:RelatedCommon
+    public class Mouse:RelatedCommon
     {
         public uint KeysCount { get; set; }
         public uint PortFrequency { get; set; }
@@ -12,6 +12,11 @@ namespace PCRelated.CurrentClasses
 
         public Mouse(string type) : base(type)
         {
+        }
+
+        public Mouse()
+        {
+            
         }
     }
 }

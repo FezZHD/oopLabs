@@ -87,6 +87,7 @@
             this.SerialazableBox.Name = "SerialazableBox";
             this.SerialazableBox.Size = new System.Drawing.Size(121, 21);
             this.SerialazableBox.TabIndex = 3;
+            this.SerialazableBox.SelectedIndexChanged += new System.EventHandler(this.SerialazableBox_SelectedIndexChanged);
             // 
             // SerialazableLabel
             // 
@@ -99,21 +100,25 @@
             // 
             // SerialazebleButton
             // 
+            this.SerialazebleButton.Enabled = false;
             this.SerialazebleButton.Location = new System.Drawing.Point(12, 522);
             this.SerialazebleButton.Name = "SerialazebleButton";
             this.SerialazebleButton.Size = new System.Drawing.Size(121, 33);
             this.SerialazebleButton.TabIndex = 5;
             this.SerialazebleButton.Text = "Сериализовать";
             this.SerialazebleButton.UseVisualStyleBackColor = true;
+            this.SerialazebleButton.Click += new System.EventHandler(this.SerialazebleButton_Click);
             // 
             // DeserialazebleButton
             // 
+            this.DeserialazebleButton.Enabled = false;
             this.DeserialazebleButton.Location = new System.Drawing.Point(15, 586);
             this.DeserialazebleButton.Name = "DeserialazebleButton";
             this.DeserialazebleButton.Size = new System.Drawing.Size(121, 33);
             this.DeserialazebleButton.TabIndex = 6;
             this.DeserialazebleButton.Text = "Десериализовать";
             this.DeserialazebleButton.UseVisualStyleBackColor = true;
+            this.DeserialazebleButton.Click += new System.EventHandler(this.DeserialazebleButton_Click);
             // 
             // DeleteButton
             // 
@@ -163,6 +168,8 @@
             this.Controls.Add(this.RelatedBox);
             this.Controls.Add(this.PropertyDataGrid);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1200, 670);
+            this.MinimumSize = new System.Drawing.Size(1200, 670);
             this.Name = "MainForm";
             this.Text = "PC Related";
             ((System.ComponentModel.ISupportInitialize)(this.ListSwitcher)).EndInit();
