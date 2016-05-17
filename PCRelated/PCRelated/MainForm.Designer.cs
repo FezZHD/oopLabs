@@ -168,6 +168,7 @@
             // DllItems
             // 
             this.DllItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DllItems.Enabled = false;
             this.DllItems.FormattingEnabled = true;
             this.DllItems.Location = new System.Drawing.Point(164, 499);
             this.DllItems.Name = "DllItems";

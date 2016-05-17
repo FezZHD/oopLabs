@@ -11,7 +11,7 @@ namespace PCRelated.CurrentClasses
 
         public MouseKeyboardSet(string type) : base(type)
         {
-            MouseKit = new Mouse("Мышь из комплекта");
+            MouseKit = new Mouse("Mouse from kit");
         }
 
         public MouseKeyboardSet ()

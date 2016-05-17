@@ -12,7 +12,7 @@ namespace PCRelated.WorkClasses
     {
         public RelatedCommon AddList()
         {
-            return new Keyboard("Клавиатура");
+            return new Keyboard("Keyboard");
         }
     }
 
@@ -20,7 +20,7 @@ namespace PCRelated.WorkClasses
     {
         public RelatedCommon AddList()
         {
-            return new Mouse("Мышь");
+            return new Mouse("Mouse");
         }
     }
 
@@ -28,7 +28,7 @@ namespace PCRelated.WorkClasses
     {
         public RelatedCommon AddList()
         {
-            return new Monitor("Монитор");
+            return new Monitor("Monitor");
         }
     }
 
@@ -36,7 +36,7 @@ namespace PCRelated.WorkClasses
     {
         public RelatedCommon AddList()
         {
-            return new Printers("Принтер");
+            return new Printers("Printer");
         }
     }
 
@@ -44,7 +44,7 @@ namespace PCRelated.WorkClasses
     {
         public RelatedCommon AddList()
         {
-            return new Mfp("МФУ");
+            return new Mfp("Mfp");
         }
     }
 
@@ -52,7 +52,7 @@ namespace PCRelated.WorkClasses
     {
         public RelatedCommon AddList()
         {
-            return new MouseKeyboardSet("Комплект: Клавиатура + мышь");
+            return new MouseKeyboardSet("Keyboard + mouse set");
         }
     }
 }
