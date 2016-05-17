@@ -38,6 +38,8 @@
             this.DeleteButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.ListSwitcher = new System.Windows.Forms.NumericUpDown();
+            this.CryptographyEnabled = new System.Windows.Forms.CheckBox();
+            this.DllItems = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.ListSwitcher)).BeginInit();
             this.SuspendLayout();
             // 
@@ -151,12 +153,34 @@
             this.ListSwitcher.TabIndex = 9;
             this.ListSwitcher.ValueChanged += new System.EventHandler(this.ListSwitcher_ValueChanged);
             // 
+            // CryptographyEnabled
+            // 
+            this.CryptographyEnabled.AutoSize = true;
+            this.CryptographyEnabled.Location = new System.Drawing.Point(12, 499);
+            this.CryptographyEnabled.Name = "CryptographyEnabled";
+            this.CryptographyEnabled.Size = new System.Drawing.Size(91, 17);
+            this.CryptographyEnabled.TabIndex = 10;
+            this.CryptographyEnabled.Text = "Шифрование";
+            this.CryptographyEnabled.UseVisualStyleBackColor = true;
+            this.CryptographyEnabled.CheckedChanged += new System.EventHandler(this.CryptographyEnabled_CheckedChanged);
+            // 
+            // DllItems
+            // 
+            this.DllItems.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DllItems.FormattingEnabled = true;
+            this.DllItems.Location = new System.Drawing.Point(164, 499);
+            this.DllItems.Name = "DllItems";
+            this.DllItems.Size = new System.Drawing.Size(121, 21);
+            this.DllItems.TabIndex = 11;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1184, 631);
+            this.ClientSize = new System.Drawing.Size(1184, 632);
+            this.Controls.Add(this.DllItems);
+            this.Controls.Add(this.CryptographyEnabled);
             this.Controls.Add(this.ListSwitcher);
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.DeleteButton);
@@ -190,6 +214,8 @@
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.NumericUpDown ListSwitcher;
+        private System.Windows.Forms.CheckBox CryptographyEnabled;
+        private System.Windows.Forms.ComboBox DllItems;
     }
 }
 

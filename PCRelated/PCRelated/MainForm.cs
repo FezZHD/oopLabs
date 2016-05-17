@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PCRelated.CurrentClasses;
 using PCRelated.WorkClasses;
+using System.Reflection;
 
 namespace PCRelated
 {
@@ -23,12 +24,25 @@ namespace PCRelated
         private List<ISerializable> _serializableList;
         private List<string> _filterList;
         private SaveFileDialog _saveDialog;
-        private OpenFileDialog _openDialog;  
+        private OpenFileDialog _openDialog;
+        private bool _isCrypt {get; set; }
+        List<DllList> DllList = new List<DllList>();
+
 
         public MainForm()
         {
-            InitializeComponent();
 
+            InitializeComponent();
+            string path = Directory.GetCurrentDirectory();
+            string dllPath = path.Substring(0, path.Length - 10) + ("\\dll");
+            string[] currentDlls = Directory.GetFiles(dllPath, "*.dll",SearchOption.AllDirectories);
+            uint currentCountList = 1;
+            while (currentCountList < currentDlls.Length)
+            {
+                DllList.Add(new DllList(currentDlls[currentCountList],Path.GetFileName(currentDlls[currentCountList])));
+                DllItems.Items.Add(DllList[(int)(currentCountList - 1)].DllName.Remove(DllList[(int)(currentCountList - 1)].DllName.Length - 4));
+                currentCountList++;
+            }
             _addingList = new List<IAddingList>
             {
                 new AddKeyboard(),
@@ -167,6 +181,18 @@ namespace PCRelated
                 }
                 newFileStream.Close();
             }
+            if ((DllItems.SelectedIndex != -1) && (_isCrypt))
+            {
+                Assembly newDll = Assembly.LoadFrom(DllList[DllItems.SelectedIndex].DllPath);
+                Object currentObject = newDll.CreateInstance(DllItems.Text + '.'+ DllItems.Text);
+                Type dllType = newDll.GetType(DllItems.Text + '.' + DllItems.Text);
+                Object[] methodParammetrs = new object[2];
+                methodParammetrs[0] = _saveDialog.FileName;
+                methodParammetrs[1] = SerialazableBox.SelectedIndex;
+                MethodInfo getMethod = dllType.GetMethod("Crypt");
+                getMethod.Invoke(currentObject, methodParammetrs);
+            }
+
         }
 
         private void DeserialazebleButton_Click(object sender, EventArgs e)
@@ -204,6 +230,18 @@ namespace PCRelated
             if (SerialazableBox.SelectedIndex != -1)
             {
                 DeserialazebleButton.Enabled = true;
+            }
+        }
+
+        private void CryptographyEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!_isCrypt)
+            {
+                _isCrypt = true;
+            }
+            else
+            {
+                _isCrypt = false;
             }
         }
     }
