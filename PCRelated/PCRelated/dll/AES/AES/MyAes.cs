@@ -36,6 +36,7 @@ namespace MyAes
             MemoryStream stream;
             using (Aes currentAes = Aes.Create())
             {
+                currentAes.Key = new byte[] {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F};
                 using (Aes myAes = Aes.Create())
                 {
                     myAes.Key = currentAes.Key;
@@ -67,10 +68,11 @@ namespace MyAes
             MemoryStream stream;
             using (Aes currentAes = Aes.Create())
             {
+                currentAes.Key = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F }; 
                 using (Aes myAes = Aes.Create())
                 {
                     myAes.Key = currentAes.Key;
-                    myAes.IV = currentAes.Key;
+                    myAes.IV = currentAes.IV;
                     stream = new MemoryStream();
                     ICryptoTransform decryptor = myAes.CreateDecryptor(myAes.Key, myAes.IV);
                     using (var decrypt = new CryptoStream(stream, decryptor, CryptoStreamMode.Write))
@@ -81,25 +83,29 @@ namespace MyAes
 
                 }
             } 
-            FileStream newFile = new FileStream(path.Remove(path.Length - 9),FileMode.CreateNew,FileAccess.Read);
+            FileStream newFile = new FileStream(path.Remove(path.Length - 9),FileMode.Create,FileAccess.Write);
             switch (serializableType)
             {
                 case 1:
                 { 
                     newFile.Write(stream.ToArray(), 0, stream.ToArray().Length);
+                    newFile.Close();
                     break;
                 }
                 default:
                 {
-                    StreamWriter streamWriter = new StreamWriter(newFile);
+                    newFile.Close();
+                    FileInfo currentFileInfo = new FileInfo(newFile.Name);
+                    StreamWriter streamWriter = currentFileInfo.CreateText();
                     string newString = Encoding.Default.GetString(stream.ToArray());
                     streamWriter.WriteLine(newString);
+                    streamWriter.Close();
                     break;
                 }
             }
            
            
-            newFile.Close();
+            
             stream.Close();
         }
     }

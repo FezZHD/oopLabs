@@ -22,41 +22,5 @@ namespace PCRelated.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Производитель")]
-        public string ManufactureName {
-            get {
-                return ((string)(this["ManufactureName"]));
-            }
-            set {
-                this["ManufactureName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Имя")]
-        public string RelatedName {
-            get {
-                return ((string)(this["RelatedName"]));
-            }
-            set {
-                this["RelatedName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Тип переферии")]
-        public string RelatedType {
-            get {
-                return ((string)(this["RelatedType"]));
-            }
-            set {
-                this["RelatedType"] = value;
-            }
-        }
     }
 }

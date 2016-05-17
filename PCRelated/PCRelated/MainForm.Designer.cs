@@ -40,6 +40,7 @@
             this.ListSwitcher = new System.Windows.Forms.NumericUpDown();
             this.CryptographyEnabled = new System.Windows.Forms.CheckBox();
             this.DllItems = new System.Windows.Forms.ComboBox();
+            this.DecryptButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ListSwitcher)).BeginInit();
             this.SuspendLayout();
             // 
@@ -173,12 +174,24 @@
             this.DllItems.Size = new System.Drawing.Size(121, 21);
             this.DllItems.TabIndex = 11;
             // 
+            // DecryptButton
+            // 
+            this.DecryptButton.Enabled = false;
+            this.DecryptButton.Location = new System.Drawing.Point(306, 586);
+            this.DecryptButton.Name = "DecryptButton";
+            this.DecryptButton.Size = new System.Drawing.Size(127, 34);
+            this.DecryptButton.TabIndex = 12;
+            this.DecryptButton.Text = "Дешифровать";
+            this.DecryptButton.UseVisualStyleBackColor = true;
+            this.DecryptButton.Click += new System.EventHandler(this.DecryptButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1184, 632);
+            this.Controls.Add(this.DecryptButton);
             this.Controls.Add(this.DllItems);
             this.Controls.Add(this.CryptographyEnabled);
             this.Controls.Add(this.ListSwitcher);
@@ -216,6 +229,7 @@
         private System.Windows.Forms.NumericUpDown ListSwitcher;
         private System.Windows.Forms.CheckBox CryptographyEnabled;
         private System.Windows.Forms.ComboBox DllItems;
+        private System.Windows.Forms.Button DecryptButton;
     }
 }
 
