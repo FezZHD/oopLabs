@@ -1,14 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using PCRelated.CurrentClasses;
 using PCRelated.WorkClasses;
@@ -26,7 +18,7 @@ namespace PCRelated
         private List<string> _filterList;
         private SaveFileDialog _saveDialog;
         private OpenFileDialog _openDialog;
-        private bool _isCrypt {get; set; }
+        private bool IsCrypt {get; set; }
         List<DllList> DllList = new List<DllList>();
         private List<string> _decryptFilter; 
 
@@ -42,7 +34,7 @@ namespace PCRelated
             while (currentCountList < currentDlls.Length)
             {
                 DllList.Add(new DllList(currentDlls[currentCountList],Path.GetFileName(currentDlls[currentCountList])));
-                DllItems.Items.Add(DllList[(int)(DllList.Count - 1)].DllName.Remove(DllList[(int)(DllList.Count- 1)].DllName.Length - 4));
+                DllItems.Items.Add(DllList[DllList.Count - 1].DllName.Remove(DllList[DllList.Count- 1].DllName.Length - 4));
                 currentCountList += 2;
             }
             _addingList = new List<IAddingList>
@@ -97,7 +89,7 @@ namespace PCRelated
             if (RelatedList.Count != 0)
             {
                 DeleteButton.Enabled = true;
-                if (SerialazableBox.SelectedIndex != -1)
+                if (SerializableBox.SelectedIndex != -1)
                 {
                     SerialazebleButton.Enabled = true;
                 }
@@ -171,13 +163,13 @@ namespace PCRelated
 
         private void SerialazebleButton_Click(object sender, EventArgs e)
         {
-            ISerializable newSerializer = _serializableList[SerialazableBox.SelectedIndex];
+            ISerializable newSerializer = _serializableList[SerializableBox.SelectedIndex];
             _saveDialog = new SaveFileDialog();
-            _saveDialog.Filter = _filterList[SerialazableBox.SelectedIndex];
+            _saveDialog.Filter = _filterList[SerializableBox.SelectedIndex];
             if (_saveDialog.ShowDialog() == DialogResult.OK)
             {
                 FileStream newFileStream = new FileStream(_saveDialog.FileName,FileMode.Create,FileAccess.ReadWrite);
-                if (SerialazableBox.SelectedIndex == 0)
+                if (SerializableBox.SelectedIndex == 0)
                 {
                     XmlSerializableClass currentClass = new XmlSerializableClass();
                     currentClass.List = RelatedList;
@@ -188,24 +180,23 @@ namespace PCRelated
                     newSerializer.Serialize(RelatedList, _saveDialog.FileName, newFileStream);
                 }
                 newFileStream.Close();
-                if ((DllItems.SelectedIndex != -1) && (_isCrypt))
+                if ((DllItems.SelectedIndex != -1) && (IsCrypt))
                     {
-                       DllUse("Crypt",_saveDialog);
+                        DllClass cryptFile = new DllAdapterClass(_saveDialog,DllItems,SerializableBox,DllList,"Crypt");
+                        cryptFile.DoDll();
                     }
             }
-            
-
         }
 
         private void DeserialazebleButton_Click(object sender, EventArgs e)
         {
-            ISerializable newSerializer = _serializableList[SerialazableBox.SelectedIndex];
+            ISerializable newSerializer = _serializableList[SerializableBox.SelectedIndex];
             _openDialog = new OpenFileDialog();
-            _openDialog.Filter = _filterList[SerialazableBox.SelectedIndex];
+            _openDialog.Filter = _filterList[SerializableBox.SelectedIndex];
             if (_openDialog.ShowDialog() == DialogResult.OK)
             {
                 FileStream newFileStream = new FileStream(_openDialog.FileName, FileMode.Open, FileAccess.Read);
-                if (SerialazableBox.SelectedIndex == 0)
+                if (SerializableBox.SelectedIndex == 0)
                 {
                     XmlSerializableClass newCurrentClass = new XmlSerializableClass();
                     newCurrentClass = (XmlSerializableClass) newSerializer.Deserialize(newFileStream);
@@ -225,15 +216,15 @@ namespace PCRelated
 
         private void SerialazableBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((RelatedList.Count != 0) && SerialazableBox.SelectedIndex != -1)
+            if ((RelatedList.Count != 0) && SerializableBox.SelectedIndex != -1)
             {
                 SerialazebleButton.Enabled = true; 
             }
 
-            if (SerialazableBox.SelectedIndex != -1)
+            if (SerializableBox.SelectedIndex != -1)
             {
                 DeserialazebleButton.Enabled = true;
-                if (_isCrypt)
+                if (IsCrypt)
                 {
                     DecryptButton.Enabled = true;
                     DllItems.Enabled = true;
@@ -243,10 +234,10 @@ namespace PCRelated
 
         private void CryptographyEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            if (!_isCrypt)
+            if (!IsCrypt)
             {
-                _isCrypt = true;
-                if (SerialazableBox.SelectedIndex != -1)
+                IsCrypt = true;
+                if (SerializableBox.SelectedIndex != -1)
                 {
                     DecryptButton.Enabled = true;
                     DllItems.Enabled = true;
@@ -255,7 +246,7 @@ namespace PCRelated
             }
             else
             {
-                _isCrypt = false;
+                IsCrypt = false;
                 DecryptButton.Enabled = false;
                 DllItems.Enabled = false;
             }
@@ -265,30 +256,12 @@ namespace PCRelated
         {
             OpenFileDialog decryptFileDialog = new OpenFileDialog();
             decryptFileDialog.Filter = _decryptFilter[DllItems.SelectedIndex];
-            if ((decryptFileDialog.ShowDialog() == DialogResult.OK) && (DllItems.SelectedIndex != -1) && (_isCrypt))
+            if ((decryptFileDialog.ShowDialog() == DialogResult.OK) && (DllItems.SelectedIndex != -1) && (IsCrypt))
             {
-                DllUse("Decrypt",decryptFileDialog);
+                DllClass decryptFile = new DllAdapterClass(decryptFileDialog,DllItems,SerializableBox,DllList,"Decrypt");
+                decryptFile.DoDll();
             }
         }
-
-
-        private void DllUse(string currentMethod,FileDialog currentDialog)
-        {
-            try
-            {
-                Assembly newDll = Assembly.LoadFrom(DllList[DllItems.SelectedIndex].DllPath);
-                Object currentObject = newDll.CreateInstance(DllItems.Text + '.' + DllItems.Text);
-                Type dllType = newDll.GetType(DllItems.Text + '.' + DllItems.Text);
-                Object[] methodParammetrs = new object[2];
-                methodParammetrs[0] = currentDialog.FileName;
-                methodParammetrs[1] = SerialazableBox.SelectedIndex;
-                MethodInfo getMethod = dllType.GetMethod(currentMethod);
-                getMethod.Invoke(currentObject, methodParammetrs);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(@"Ошибка при добавлении или при работе модуля");
-            }
-        }
+    
     }
 }

@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrentClasses\DllAdapterClass.cs" />
+    <Compile Include="CurrentClasses\DllClass.cs" />
     <Compile Include="CurrentClasses\Keyboard.cs" />
     <Compile Include="WorkClasses\DllList.cs" />
     <Compile Include="WorkClasses\XmlSerializableClass.cs" />

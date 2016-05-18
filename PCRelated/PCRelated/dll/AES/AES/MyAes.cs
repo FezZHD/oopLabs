@@ -10,6 +10,21 @@ namespace MyAes
         private byte[] key;
         private byte[] IV;
       
+        private void InitializationKey()
+        {
+            key = new byte[32];
+            IV= new byte[16];
+            for (int i = 0; i < 32; i++)
+            {
+                key[i] = (byte)i;
+                if (i < 16)
+                {
+                    IV[i] = (byte)i;
+                }
+            }
+        }
+
+
         public void Crypt(string path , int serializationType)
         {
             FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
@@ -59,19 +74,6 @@ namespace MyAes
         }
 
 
-        private void InitializationKey()
-        {
-            key = new byte[32];
-            IV= new byte[16];
-            for (int i = 0; i < 32; i++)
-            {
-                key[i] = (byte)i;
-                if (i < 16)
-                {
-                    IV[i] = (byte)i;
-                }
-            }
-        }
 
         public void Decrypt(string path , int serializableType)
         {

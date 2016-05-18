@@ -31,7 +31,7 @@
             this.PropertyDataGrid = new System.Windows.Forms.PropertyGrid();
             this.RelatedBox = new System.Windows.Forms.ComboBox();
             this.RelatedLabel = new System.Windows.Forms.Label();
-            this.SerialazableBox = new System.Windows.Forms.ComboBox();
+            this.SerializableBox = new System.Windows.Forms.ComboBox();
             this.SerialazableLabel = new System.Windows.Forms.Label();
             this.SerialazebleButton = new System.Windows.Forms.Button();
             this.DeserialazebleButton = new System.Windows.Forms.Button();
@@ -78,19 +78,19 @@
             this.RelatedLabel.TabIndex = 2;
             this.RelatedLabel.Text = "Тип переферии";
             // 
-            // SerialazableBox
+            // SerializableBox
             // 
-            this.SerialazableBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.SerialazableBox.FormattingEnabled = true;
-            this.SerialazableBox.Items.AddRange(new object[] {
+            this.SerializableBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SerializableBox.FormattingEnabled = true;
+            this.SerializableBox.Items.AddRange(new object[] {
             "XML",
             "Бинарная",
             "Текстовая\t"});
-            this.SerialazableBox.Location = new System.Drawing.Point(12, 99);
-            this.SerialazableBox.Name = "SerialazableBox";
-            this.SerialazableBox.Size = new System.Drawing.Size(121, 21);
-            this.SerialazableBox.TabIndex = 3;
-            this.SerialazableBox.SelectedIndexChanged += new System.EventHandler(this.SerialazableBox_SelectedIndexChanged);
+            this.SerializableBox.Location = new System.Drawing.Point(12, 99);
+            this.SerializableBox.Name = "SerializableBox";
+            this.SerializableBox.Size = new System.Drawing.Size(121, 21);
+            this.SerializableBox.TabIndex = 3;
+            this.SerializableBox.SelectedIndexChanged += new System.EventHandler(this.SerialazableBox_SelectedIndexChanged);
             // 
             // SerialazableLabel
             // 
@@ -201,7 +201,7 @@
             this.Controls.Add(this.DeserialazebleButton);
             this.Controls.Add(this.SerialazebleButton);
             this.Controls.Add(this.SerialazableLabel);
-            this.Controls.Add(this.SerialazableBox);
+            this.Controls.Add(this.SerializableBox);
             this.Controls.Add(this.RelatedLabel);
             this.Controls.Add(this.RelatedBox);
             this.Controls.Add(this.PropertyDataGrid);
@@ -221,7 +221,7 @@
         public System.Windows.Forms.PropertyGrid PropertyDataGrid;
         private System.Windows.Forms.ComboBox RelatedBox;
         private System.Windows.Forms.Label RelatedLabel;
-        private System.Windows.Forms.ComboBox SerialazableBox;
+        private System.Windows.Forms.ComboBox SerializableBox;
         private System.Windows.Forms.Label SerialazableLabel;
         private System.Windows.Forms.Button SerialazebleButton;
         private System.Windows.Forms.Button DeserialazebleButton;
