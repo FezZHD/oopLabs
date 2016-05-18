@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows.Forms;
 using PCRelated.CurrentClasses;
 using PCRelated.WorkClasses;
-using System.Reflection;
 
 namespace PCRelated
 {
@@ -82,6 +81,7 @@ namespace PCRelated
             NewRelated = NewAddingRelated.AddList();
         }
 
+
         private void AddButton_Click(object sender, EventArgs e)
         {
             RelatedList.Add(NewRelated);
@@ -99,6 +99,7 @@ namespace PCRelated
                 ListSwitcher.Enabled = true;
             }
         }
+
 
         private void ListSwitcher_ValueChanged(object sender, EventArgs e)
         {
@@ -125,8 +126,8 @@ namespace PCRelated
                     }
                 }
             }
-
         }
+
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -161,6 +162,7 @@ namespace PCRelated
           
         }
 
+
         private void SerialazebleButton_Click(object sender, EventArgs e)
         {
             ISerializable newSerializer = _serializableList[SerializableBox.SelectedIndex];
@@ -188,6 +190,7 @@ namespace PCRelated
             }
         }
 
+
         private void DeserialazebleButton_Click(object sender, EventArgs e)
         {
             ISerializable newSerializer = _serializableList[SerializableBox.SelectedIndex];
@@ -214,6 +217,7 @@ namespace PCRelated
             SerialazebleButton.Enabled = true;
         }
 
+
         private void SerialazableBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((RelatedList.Count != 0) && SerializableBox.SelectedIndex != -1)
@@ -231,6 +235,7 @@ namespace PCRelated
                 }
             }
         }
+
 
         private void CryptographyEnabled_CheckedChanged(object sender, EventArgs e)
         {
@@ -251,6 +256,7 @@ namespace PCRelated
                 DllItems.Enabled = false;
             }
         }
+
 
         private void DecryptButton_Click(object sender, EventArgs e)
         {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.IO;
+﻿using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -7,19 +6,19 @@ namespace MyAes
 {
     public class MyAes
     {
-        private byte[] key;
-        private byte[] IV;
+        private byte[] _key;
+        private byte[] _IV;
       
         private void InitializationKey()
         {
-            key = new byte[32];
-            IV= new byte[16];
+            _key = new byte[32];
+            _IV= new byte[16];
             for (int i = 0; i < 32; i++)
             {
-                key[i] = (byte)i;
+                _key[i] = (byte)i;
                 if (i < 16)
                 {
-                    IV[i] = (byte)i;
+                    _IV[i] = (byte)i;
                 }
             }
         }
@@ -50,7 +49,6 @@ namespace MyAes
                     break;
                 }
 
-
             }
             file.Close();
             MemoryStream stream;
@@ -58,8 +56,8 @@ namespace MyAes
             InitializationKey();
                 using (Aes myAes = Aes.Create())
                 {
-                    myAes.Key = key;
-                    myAes.IV = IV;
+                    myAes.Key = _key;
+                    myAes.IV = _IV;
 
                     ICryptoTransform encryptor = myAes.CreateEncryptor(myAes.Key, myAes.IV);
                     var encrypt = new CryptoStream(stream, encryptor, CryptoStreamMode.Write);
@@ -86,8 +84,8 @@ namespace MyAes
             stream = new MemoryStream();
             using (Aes myAes = Aes.Create())
             {
-                myAes.Key = key;
-                myAes.IV = IV;
+                myAes.Key = _key;
+                myAes.IV = _IV;
 
                 ICryptoTransform decryptor = myAes.CreateDecryptor(myAes.Key, myAes.IV);
                 var decrypt = new CryptoStream(stream, decryptor, CryptoStreamMode.Write);
@@ -110,16 +108,12 @@ namespace MyAes
                     FileInfo currentFileInfo = new FileInfo(newFile.Name);
                     StreamWriter streamWriter = currentFileInfo.CreateText();
                     ASCIIEncoding stringAsciiEncoding = new ASCIIEncoding();
-                    byte[] testBytes = stream.ToArray();
                     string newString = stringAsciiEncoding.GetString(stream.ToArray());
                     streamWriter.WriteLine(newString);
                     streamWriter.Close();
                     break;
                 }
-            }
-           
-           
-            
+            }   
             stream.Close();
         }
     }
