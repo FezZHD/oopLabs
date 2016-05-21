@@ -9,14 +9,10 @@ namespace PCRelated.CurrentClasses
         [TypeConverter(typeof(ExpandableObjectConverter))]
         public Mouse MouseKit { get; set; }
 
-        public MouseKeyboardSet(string type) : base(type)//looks like a facade pattern
+        public MouseKeyboardSet()
         {
-            MouseKit = new Mouse("Mouse from kit");
+            MouseKit = new Mouse();
         }
 
-        public MouseKeyboardSet ()
-        {
-            
-        }
     }
 }

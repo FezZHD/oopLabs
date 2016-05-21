@@ -9,13 +9,9 @@ namespace PCRelated.CurrentClasses
         public uint CopySpeen { get; set; }
         public uint MaxSpeedCopy { get; set; }
 
-        public Printers(string type) : base(type)
-        {
-        }
-
         public Printers()
         {
-
         }
+
     }
 }

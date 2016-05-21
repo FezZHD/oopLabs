@@ -11,13 +11,9 @@ namespace PCRelated.CurrentClasses
         public string MatrixType { get; set; }
         public uint Frequency { get; set; }
 
-        public Monitor(string type) : base(type)
+        public Monitor()
         {
         }
 
-        public Monitor()
-        {
-            
-        }
     }
 }

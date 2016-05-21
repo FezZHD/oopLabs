@@ -10,13 +10,9 @@ namespace PCRelated.CurrentClasses
         public uint PortFrequency { get; set; }
         public string Light { get; set; }
 
-        public Keyboard(string type) : base(type)
+        public Keyboard() 
         {
         }
 
-        public Keyboard()
-        {
-            
-        }
     }
 }

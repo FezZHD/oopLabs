@@ -171,16 +171,7 @@ namespace PCRelated
             if (_saveDialog.ShowDialog() == DialogResult.OK)
             {
                 FileStream newFileStream = new FileStream(_saveDialog.FileName,FileMode.Create,FileAccess.ReadWrite);
-                if (SerializableBox.SelectedIndex == 0)
-                {
-                    XmlSerializableClass currentClass = new XmlSerializableClass();
-                    currentClass.List = RelatedList;
-                    newSerializer.Serialize(currentClass, _saveDialog.FileName, newFileStream);
-                }
-                else
-                {
-                    newSerializer.Serialize(RelatedList, _saveDialog.FileName, newFileStream);
-                }
+                newSerializer.Serialize(RelatedList, _saveDialog.FileName, newFileStream);
                 newFileStream.Close();
                 if ((DllItems.SelectedIndex != -1) && (IsCrypt))
                     {
@@ -196,20 +187,23 @@ namespace PCRelated
             ISerializable newSerializer = _serializableList[SerializableBox.SelectedIndex];
             _openDialog = new OpenFileDialog();
             _openDialog.Filter = _filterList[SerializableBox.SelectedIndex];
+            FileStream newFileStream = null;
             if (_openDialog.ShowDialog() == DialogResult.OK)
             {
-                FileStream newFileStream = new FileStream(_openDialog.FileName, FileMode.Open, FileAccess.Read);
-                if (SerializableBox.SelectedIndex == 0)
+                try
                 {
-                    XmlSerializableClass newCurrentClass = new XmlSerializableClass();
-                    newCurrentClass = (XmlSerializableClass) newSerializer.Deserialize(newFileStream);
-                    RelatedList = newCurrentClass.List;
+                    newFileStream = new FileStream(_openDialog.FileName, FileMode.Open, FileAccess.Read);
+                        RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
                 }
-                else
+                finally
                 {
-                    RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
+                    if (newFileStream != null)
+                    {
+                        newFileStream.Close();
+                    }
                 }
-                newFileStream.Close();
+          
+                
             }
             ListSwitcher.Enabled = true;
             ListSwitcher.Value = RelatedList.Count;

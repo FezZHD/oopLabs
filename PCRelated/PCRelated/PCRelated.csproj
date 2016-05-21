@@ -52,7 +52,6 @@
     <Compile Include="CurrentClasses\DllClass.cs" />
     <Compile Include="CurrentClasses\Keyboard.cs" />
     <Compile Include="WorkClasses\DllList.cs" />
-    <Compile Include="WorkClasses\XmlSerializableClass.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

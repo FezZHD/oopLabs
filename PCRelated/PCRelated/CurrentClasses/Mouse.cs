@@ -10,13 +10,8 @@ namespace PCRelated.CurrentClasses
         public string Light { get; set; }
         public uint Dpi { get; set; }
 
-        public Mouse(string type) : base(type)
-        {
-        }
-
         public Mouse()
         {
-            
         }
     }
 }
