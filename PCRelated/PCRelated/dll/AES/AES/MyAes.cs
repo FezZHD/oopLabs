@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using PCRelated.WorkClasses;
 
 namespace MyAes
 {
-    public class MyAes
+    public class MyAes:IDll
     {
         private byte[] _key;
         private byte[] _IV;

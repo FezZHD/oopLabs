@@ -68,6 +68,7 @@
     <Compile Include="CurrentClasses\RelatedCommon.cs" />
     <Compile Include="WorkClasses\BinarySerialize.cs" />
     <Compile Include="WorkClasses\IAddingList.cs" />
+    <Compile Include="WorkClasses\IDll.cs" />
     <Compile Include="WorkClasses\ISerializable.cs" />
     <Compile Include="WorkClasses\TextSerializer.cs" />
     <Compile Include="WorkClasses\XmlSerialize.cs" />

@@ -35,7 +35,7 @@ namespace PCRelated.CurrentClasses
             }
             catch (Exception)
             {
-                MessageBox.Show(@"Ошибка при добавлении или при работе модуля");
+                MessageBox.Show(@"Ошибка при добавлении или при работе плагина");
                 return;
             }
         }
