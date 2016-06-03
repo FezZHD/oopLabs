@@ -9,7 +9,6 @@ namespace PCRelated.CurrentClasses
     XmlInclude(typeof(Mfp)),XmlInclude(typeof(MouseKeyboardSet))]
     public abstract class RelatedCommon
     {
-        //public string Type { get; }
         public string Name { get; set; }
         public string Interfaces { get; set; }
 

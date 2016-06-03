@@ -2,7 +2,7 @@
 
 namespace PCRelated.WorkClasses
 {
-    interface IAddingList//maybe this is composite pattern
+    interface IAddingList
     {
         RelatedCommon AddList();
     }

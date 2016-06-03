@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using PCRelated.CurrentClasses;
 using PCRelated.WorkClasses;
@@ -19,14 +20,14 @@ namespace PCRelated
         private OpenFileDialog _openDialog;
         private bool IsCrypt {get; set; }
         List<DllList> DllList = new List<DllList>();
-        private List<string> _decryptFilter; 
-
+        private List<string> _decryptFilter;
+        public List<PluginInterface.IPlugin> PluginsList;
 
         public MainForm()
         {
 
             InitializeComponent();
-            string path = Directory.GetCurrentDirectory();
+          /* string path = Directory.GetCurrentDirectory();
             string dllPath = path.Substring(0, path.Length - 10) + ("\\dll");
             string[] currentDlls = Directory.GetFiles(dllPath, "*.dll",SearchOption.AllDirectories);
             uint currentCountList = 1;
@@ -35,7 +36,10 @@ namespace PCRelated
                 DllList.Add(new DllList(currentDlls[currentCountList],Path.GetFileName(currentDlls[currentCountList])));
                 DllItems.Items.Add(DllList[DllList.Count - 1].DllName.Remove(DllList[DllList.Count- 1].DllName.Length - 4));
                 currentCountList += 2;
-            }
+            }*/
+            PluginsList = new List<PluginInterface.IPlugin>();
+            string path = Directory.GetCurrentDirectory() + "\\plugins\\";
+            PluginsList = LoadPlugins(path);
             _addingList = new List<IAddingList>
             {
                 new AddKeyboard(),
@@ -69,6 +73,34 @@ namespace PCRelated
             
         }
 
+        private List<PluginInterface.IPlugin> LoadPlugins(string dir)
+        {
+            List<PluginInterface.IPlugin> PluginList = new List<PluginInterface.IPlugin>();
+            PluginInterface.IPlugin plugin = null;
+            try
+            {
+                foreach (var file in Directory.EnumerateFiles(dir, "*.dll", SearchOption.AllDirectories))
+                {
+                    Assembly asm = Assembly.LoadFrom(file);
+
+                    foreach (Type t in asm.GetExportedTypes())
+                    {
+                        if (typeof(PluginInterface.IPlugin).IsAssignableFrom(t))
+                        {
+                            plugin = (PluginInterface.IPlugin)asm.CreateInstance(t.FullName);
+                            PluginList.Add(plugin);
+                            DllItems.Items.Add(plugin.GetType().Name);
+                        }
+                    }
+                }
+                return PluginList;
+            }
+            catch
+            {
+                MessageBox.Show(@"Ошибка при загрузке плагинов");
+                return null;
+            }
+        }
 
 
         private void RelatedBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -170,14 +202,25 @@ namespace PCRelated
             _saveDialog.Filter = _filterList[SerializableBox.SelectedIndex];
             if (_saveDialog.ShowDialog() == DialogResult.OK)
             {
-                FileStream newFileStream = new FileStream(_saveDialog.FileName,FileMode.Create,FileAccess.ReadWrite);
-                newSerializer.Serialize(RelatedList, _saveDialog.FileName, newFileStream);
-                newFileStream.Close();
+                FileStream newFileStream = new FileStream(_saveDialog.FileName, FileMode.Create, FileAccess.ReadWrite);
                 if ((DllItems.SelectedIndex != -1) && (IsCrypt))
+                {
+                    foreach (PluginInterface.IPlugin plugin in PluginsList)
                     {
-                        DllClass cryptFile = new DllAdapterClass(_saveDialog,DllItems,SerializableBox,DllList,"Crypt");
-                        cryptFile.DoDll();
+                        if (plugin.GetType().Name == DllItems.Text)
+                        {
+                            newSerializer = new Adapter(plugin);
+                            newSerializer.Serialize(RelatedList, _saveDialog.FileName, newFileStream);
+                            break;
+                        }
                     }
+
+                }
+                else
+                {
+                    newSerializer.Serialize(RelatedList, _saveDialog.FileName, newFileStream);
+                }
+            newFileStream.Close();
             }
         }
 
@@ -187,23 +230,38 @@ namespace PCRelated
             ISerializable newSerializer = _serializableList[SerializableBox.SelectedIndex];
             _openDialog = new OpenFileDialog();
             _openDialog.Filter = _filterList[SerializableBox.SelectedIndex];
-            FileStream newFileStream = null;
+            FileStream newFileStream;
             if (_openDialog.ShowDialog() == DialogResult.OK)
             {
-                try
-                {
-                    newFileStream = new FileStream(_openDialog.FileName, FileMode.Open, FileAccess.Read);
-                        RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
+                newFileStream = new FileStream(_openDialog.FileName, FileMode.Open, FileAccess.Read);
+                if ((IsCrypt) && (DllItems.SelectedIndex != -1))
+                {                  
+                        foreach (PluginInterface.IPlugin plugin in PluginsList)
+                        {
+                            if (plugin.GetType().Name == DllItems.Text)
+                            {
+                            newSerializer = new Adapter(plugin);
+                            RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
+                            break;
+                            }
+                        }                                      
                 }
-                finally
+                else
                 {
-                    if (newFileStream != null)
+                    try
+                    { 
+                        RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
+                    }
+                    finally
                     {
-                        newFileStream.Close();
+                        if (newFileStream != null)
+                        {
+                            newFileStream.Close();
+                        }
                     }
                 }
-          
-                
+
+
             }
             ListSwitcher.Enabled = true;
             ListSwitcher.Value = RelatedList.Count;
@@ -256,12 +314,22 @@ namespace PCRelated
         {
             OpenFileDialog decryptFileDialog = new OpenFileDialog();
             decryptFileDialog.Filter = _decryptFilter[DllItems.SelectedIndex];
+            PluginInterface.IPlugin necessaryPlugin = null;
             if ((decryptFileDialog.ShowDialog() == DialogResult.OK) && (DllItems.SelectedIndex != -1) && (IsCrypt))
             {
-                DllClass decryptFile = new DllAdapterClass(decryptFileDialog,DllItems,SerializableBox,DllList,"Decrypt");
-                decryptFile.DoDll();
+                foreach (PluginInterface.IPlugin plugin in PluginsList)
+                {
+                    if (plugin.GetType().Name == DllItems.Text)
+                    {
+                        necessaryPlugin = plugin;
+                        break;
+                    }
+                }
+                if (necessaryPlugin != null)
+                {
+                    necessaryPlugin.Decrypt(decryptFileDialog.FileName, SerializableBox.SelectedIndex);
+                }
             }
         }
-    
     }
 }
