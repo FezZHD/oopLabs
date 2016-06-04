@@ -116,9 +116,6 @@ namespace MyDes
                         break;
                     }
             }
-
-
-
             stream.Close();
         }
     }

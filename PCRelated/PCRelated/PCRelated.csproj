@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrentClasses\Keyboard.cs" />
+    <Compile Include="WorkClasses\AddList.cs" />
+    <Compile Include="WorkClasses\DeleteList.cs" />
     <Compile Include="WorkClasses\DllList.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -69,10 +71,12 @@
     <Compile Include="CurrentClasses\RelatedCommon.cs" />
     <Compile Include="WorkClasses\BinarySerialize.cs" />
     <Compile Include="WorkClasses\Adapter.cs" />
+    <Compile Include="WorkClasses\Facade.cs" />
     <Compile Include="WorkClasses\IAddingList.cs" />
-    <Compile Include="WorkClasses\IDll.cs" />
     <Compile Include="WorkClasses\ISerializable.cs" />
+    <Compile Include="WorkClasses\List.cs" />
     <Compile Include="WorkClasses\TextSerializer.cs" />
+    <Compile Include="WorkClasses\WorkingList.cs" />
     <Compile Include="WorkClasses\XmlSerialize.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -99,9 +103,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="dll\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

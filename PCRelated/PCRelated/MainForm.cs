@@ -13,30 +13,22 @@ namespace PCRelated
         private List<IAddingList> _addingList;
         private IAddingList NewAddingRelated { get; set; }
         public RelatedCommon NewRelated { get; set; }
-        public List<RelatedCommon> RelatedList = new List<RelatedCommon>();
+        public static List<RelatedCommon> RelatedList;
         private List<ISerializable> _serializableList;
         private List<string> _filterList;
         private SaveFileDialog _saveDialog;
         private OpenFileDialog _openDialog;
         private bool IsCrypt {get; set; }
-        List<DllList> DllList = new List<DllList>();
         private List<string> _decryptFilter;
         public List<PluginInterface.IPlugin> PluginsList;
+        public static Facade ListFacade = new Facade();
+        public WorkingList WorkingList = new WorkingList(ListFacade);
+        private List _list = new List();
 
         public MainForm()
         {
 
             InitializeComponent();
-          /* string path = Directory.GetCurrentDirectory();
-            string dllPath = path.Substring(0, path.Length - 10) + ("\\dll");
-            string[] currentDlls = Directory.GetFiles(dllPath, "*.dll",SearchOption.AllDirectories);
-            uint currentCountList = 1;
-            while (currentCountList < currentDlls.Length)
-            {
-                DllList.Add(new DllList(currentDlls[currentCountList],Path.GetFileName(currentDlls[currentCountList])));
-                DllItems.Items.Add(DllList[DllList.Count - 1].DllName.Remove(DllList[DllList.Count- 1].DllName.Length - 4));
-                currentCountList += 2;
-            }*/
             PluginsList = new List<PluginInterface.IPlugin>();
             string path = Directory.GetCurrentDirectory() + "\\plugins\\";
             PluginsList = LoadPlugins(path);
@@ -116,7 +108,8 @@ namespace PCRelated
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            RelatedList.Add(NewRelated);
+            RelatedList = _list.GetInstance(RelatedList);
+            WorkingList.FacadeAdd(NewRelated);
             ListSwitcher.Value = RelatedList.Count;
             if (RelatedList.Count != 0)
             {
@@ -135,13 +128,22 @@ namespace PCRelated
 
         private void ListSwitcher_ValueChanged(object sender, EventArgs e)
         {
+            if (ListSwitcher.Value == 0)
+            {
+                return;
+            }
             try
             {
                 PropertyDataGrid.SelectedObject = RelatedList[(int) (ListSwitcher.Value - 1)];
             }
             catch (ArgumentOutOfRangeException)
-            {
+            {    
                 MessageBox.Show(@"Выход за пределы значения списка");
+                if (RelatedList.Count == 0)
+                {
+                    ListSwitcher.Enabled = false;
+                    return;   
+                }
                 if (((ListSwitcher.Value) != RelatedList.Count))
                 {
                     ListSwitcher.Value = RelatedList.Count;
@@ -163,16 +165,17 @@ namespace PCRelated
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            RelatedList.RemoveAt((int) ListSwitcher.Value - 1);
+            WorkingList.FacadeDelete((int) ListSwitcher.Value - 1);
             switch ((int) ListSwitcher.Value)
             {
                 case 1:
                 {
                     if (RelatedList.Count == 0)
                     {
-                        PropertyDataGrid.SelectedObject = null; 
-                        
-                        DeleteButton.Enabled = false; 
+                        PropertyDataGrid.SelectedObject = null;
+                        ListSwitcher.Enabled = false;
+                        DeleteButton.Enabled = false;
+                        ListSwitcher.Value = 0;
                     }
                     else
                     {
@@ -192,7 +195,7 @@ namespace PCRelated
                 }                 
             } 
           
-        }
+       }
 
 
         private void SerialazebleButton_Click(object sender, EventArgs e)
@@ -235,21 +238,21 @@ namespace PCRelated
             {
                 newFileStream = new FileStream(_openDialog.FileName, FileMode.Open, FileAccess.Read);
                 if ((IsCrypt) && (DllItems.SelectedIndex != -1))
-                {                  
-                        foreach (PluginInterface.IPlugin plugin in PluginsList)
+                {
+                    foreach (PluginInterface.IPlugin plugin in PluginsList)
+                    {
+                        if (plugin.GetType().Name == DllItems.Text)
                         {
-                            if (plugin.GetType().Name == DllItems.Text)
-                            {
                             newSerializer = new Adapter(plugin);
                             RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
                             break;
-                            }
-                        }                                      
+                        }
+                    }
                 }
                 else
                 {
                     try
-                    { 
+                    {
                         RelatedList = (List<RelatedCommon>) newSerializer.Deserialize(newFileStream);
                     }
                     finally
@@ -263,15 +266,20 @@ namespace PCRelated
 
 
             }
-            ListSwitcher.Enabled = true;
-            ListSwitcher.Value = RelatedList.Count;
-            DeleteButton.Enabled = true;
-            SerialazebleButton.Enabled = true;
+            else
+            {
+                return;
+            }
+                ListSwitcher.Enabled = true;
+                ListSwitcher.Value = RelatedList.Count;
+                DeleteButton.Enabled = true;
+                SerialazebleButton.Enabled = true; 
         }
 
 
         private void SerialazableBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RelatedList = _list.GetInstance(RelatedList);
             if ((RelatedList.Count != 0) && SerializableBox.SelectedIndex != -1)
             {
                 SerialazebleButton.Enabled = true; 

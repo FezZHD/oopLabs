@@ -17,6 +17,7 @@ namespace PCRelated.WorkClasses
         {
             XmlSerializer xmlFormater = new XmlSerializer(typeof(List<RelatedCommon>));
             List<RelatedCommon> returnedObject = (List<RelatedCommon>) xmlFormater.Deserialize(currentFile);
+            currentFile.Close();
             return returnedObject;
         }
     }

@@ -97,16 +97,16 @@ namespace MyAes
                 decrypt.FlushFinalBlock();
 
             }
-            FileStream newFile = new FileStream(path.Remove(path.Length - 9), FileMode.Create, FileAccess.Write);
-            switch (serializableType)
+            using (FileStream newFile = new FileStream(path.Remove(path.Length - 9), FileMode.Create, FileAccess.ReadWrite))
             {
-                case 1:
+                switch (serializableType)
+                {
+                    case 1:
                     {
                         newFile.Write(stream.ToArray(), 0, stream.ToArray().Length);
-                        newFile.Close();
                         break;
                     }
-                default:
+                    default:
                     {
                         newFile.Close();
                         FileInfo currentFileInfo = new FileInfo(newFile.Name);
@@ -117,6 +117,7 @@ namespace MyAes
                         streamWriter.Close();
                         break;
                     }
+                }
             }
             stream.Close();
         }
